@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RuxxPuzzle - 10 Game Puzzle Blockly</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Efek Partikel Background -->
+    <div class="particles" id="particles"></div>
+    
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <i class="fas fa-puzzle-piece logo-icon"></i>
+                <span class="logo-text">Ruxx<span class="logo-highlight">Puzzle</span></span>
+            </div>
+            <nav class="nav-menu">
+                <button class="nav-btn active" data-view="home">
+                    <i class="fas fa-home"></i> Beranda
+                </button>
+                <button class="nav-btn" data-view="games">
+                    <i class="fas fa-gamepad"></i> Games
+                </button>
+                <button class="nav-btn" data-view="achievements">
+                    <i class="fas fa-trophy"></i> Prestasi
+                </button>
+                <button class="nav-btn" data-view="leaderboard">
+                    <i class="fas fa-crown"></i> Leaderboard
+                </button>
+            </nav>
+            <div class="header-stats">
+                <div class="stat-item">
+                    <i class="fas fa-star"></i>
+                    <span id="totalStars">0</span>
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-coins"></i>
+                    <span id="totalCoins">0</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Home View -->
+        <section id="home-view" class="view active">
+            <div class="hero-section">
+                <div class="hero-content">
+                    <h1 class="hero-title">
+                        <span class="title-line">Selamat Datang di</span>
+                        <span class="title-main">Ruxx<span class="pulse">Puzzle</span></span>
+                    </h1>
+                    <p class="hero-subtitle">10 Game Puzzle Seru yang Mengasah Otakmu! 🧩</p>
+                    <div class="hero-features">
+                        <div class="feature-card">
+                            <i class="fas fa-brain"></i>
+                            <span>Asah Logika</span>
+                        </div>
+                        <div class="feature-card">
+                            <i class="fas fa-bolt"></i>
+                            <span>Refleks Cepat</span>
+                        </div>
+                        <div class="feature-card">
+                            <i class="fas fa-smile"></i>
+                            <span>Seru & Menyenangkan</span>
+                        </div>
+                        <div class="feature-card">
+                            <i class="fas fa-chart-line"></i>
+                            <span>Progresif</span>
+                        </div>
+                    </div>
+                    <button class="cta-button" onclick="switchView('games')">
+                        <i class="fas fa-play-circle"></i> Mulai Bermain Sekarang!
+                    </button>
+                </div>
+                <div class="hero-animation">
+                    <div class="floating-shapes">
+                        <div class="shape shape-1"></div>
+                        <div class="shape shape-2"></div>
+                        <div class="shape shape-3"></div>
+                        <div class="shape shape-4"></div>
+                        <div class="shape shape-5"></div>
+                        <div class="shape shape-6"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Games View -->
+        <section id="games-view" class="view">
+            <div class="games-header">
+                <h2><i class="fas fa-th"></i> Pilih Game Puzzle</h2>
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="all">Semua</button>
+                    <button class="filter-btn" data-filter="logic">Logika</button>
+                    <button class="filter-btn" data-filter="memory">Memory</button>
+                    <button class="filter-btn" data-filter="speed">Kecepatan</button>
+                    <button class="filter-btn" data-filter="pattern">Pola</button>
+                </div>
+            </div>
+            <div class="games-grid" id="gamesGrid">
+                <!-- Games akan dirender oleh JavaScript -->
+            </div>
+        </section>
+
+        <!-- Game Play View -->
+        <section id="gameplay-view" class="view">
+            <div class="gameplay-container">
+                <div class="gameplay-header">
+                    <button class="back-btn" onclick="backToGames()">
+                        <i class="fas fa-arrow-left"></i> Kembali
+                    </button>
+                    <h2 id="currentGameTitle">Game Title</h2>
+                    <div class="gameplay-stats">
+                        <span class="game-stat"><i class="fas fa-star"></i> <span id="gameStars">0</span></span>
+                        <span class="game-stat"><i class="fas fa-clock"></i> <span id="gameTimer">00:00</span></span>
+                        <span class="game-stat"><i class="fas fa-check-circle"></i> <span id="gameScore">0</span></span>
+                    </div>
+                </div>
+                <div class="gameplay-area" id="gameplayArea">
+                    <!-- Area game akan dirender di sini -->
+                </div>
+                <div class="gameplay-controls" id="gameplayControls">
+                    <!-- Kontrol game -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Achievements View -->
+        <section id="achievements-view" class="view">
+            <h2><i class="fas fa-trophy"></i> Prestasi</h2>
+            <div class="achievements-grid" id="achievementsGrid">
+                <!-- Prestasi akan dirender -->
+            </div>
+        </section>
+
+        <!-- Leaderboard View -->
+        <section id="leaderboard-view" class="view">
+            <h2><i class="fas fa-crown"></i> Leaderboard</h2>
+            <div class="leaderboard-table" id="leaderboardTable">
+                <!-- Leaderboard akan dirender -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal Popup -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal-content" id="modalContent">
+            <!-- Konten modal dinamis -->
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2026 RuxxPuzzle. Dibuat dengan <i class="fas fa-heart"></i> untuk mengasah otak.</p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/puzzle-engine.js"></script>
+    <script src="js/games.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
